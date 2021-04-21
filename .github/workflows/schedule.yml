@@ -1,6 +1,6 @@
 name: 'Schedule Debug'
 on:
-  pull_request:
+  push:
     branches:
       - master
   schedule:
