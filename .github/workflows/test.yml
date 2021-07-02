@@ -1,0 +1,24 @@
+name: test
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'name'
+        required: true
+
+jobs:
+  invoke:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Verify name is allowed
+      working-directory: core
+      run: |
+        list=('kamillle')
+
+        if printf '%s\n' "${list[@]}" | grep -qx ${{ github.event.inputs.name }} > /dev/null >&2; the
+          echo 'name is allowed'
+        else
+          echo 'name is not allowed'
+          exit 1
+        fi
