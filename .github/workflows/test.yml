@@ -15,7 +15,7 @@ jobs:
       run: |
         list=('kamillle')
 
-        if printf '%s\n' "${list[@]}" | grep -qx ${{ github.event.inputs.name }} > /dev/null >&2; the
+        if printf '%s\n' "${list[@]}" | grep -qx ${{ github.event.inputs.name }} > /dev/null >&2; then
           echo 'name is allowed'
         else
           echo 'name is not allowed'
