@@ -7,15 +7,17 @@ on:
         description: 'name'
         required: true
 
+env:
+  LIST: ('kamillle' 'hoge')
+  T_NAME: ${{ github.event.inputs.name }}
+
 jobs:
   invoke:
     runs-on: ubuntu-latest
     steps:
     - name: Verify name is allowed
       run: |
-        list=('kamillle' 'hoge')
-
-        if printf '%s\n' "${list[@]}" | grep -qx ${{ github.event.inputs.name }} > /dev/null >&2; then
+        if printf '%s\n' "${LIST[@]}" | grep -qx ${T_NAME} > /dev/null >&2; then
           echo 'name is allowed'
         else
           echo 'name is not allowed'
