@@ -17,10 +17,16 @@ jobs:
     steps:
     - name: Verify name is allowed
       run: |
-        printf '%s\n' "${LIST[@]}"
-        if printf '%s\n' "${LIST[@]}" | grep -qx ${T_NAME} > /dev/null >&2; then
-          echo 'name is allowed'
-        else
+        not_found=true
+        for name in "${LIST[@]}"
+        do
+          echo $name
+          if echo $name | grep -qx ${T_NAME} >/dev/null; then
+            not_found=false
+          fi
+        done
+
+        if [ ${not_found} ]; then
           echo 'name is not allowed'
           exit 1
         fi
