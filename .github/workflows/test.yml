@@ -17,8 +17,7 @@ jobs:
     steps:
     - name: Verify name is allowed
       run: |
-        echo ${LIST[@]}
-        echo ${T_NAME}
+        echo printf '%s\n' "${LIST[@]}
         echo `printf '%s\n' "${LIST[@]}" | grep -x ${T_NAME}`
         if printf '%s\n' "${LIST[@]}" | grep -qx ${T_NAME} > /dev/null >&2; then
           echo 'name is allowed'
