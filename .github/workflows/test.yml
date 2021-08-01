@@ -17,6 +17,7 @@ jobs:
     steps:
     - name: Verify name is allowed
       run: |
+        LIST=('kamillle', 'hoge')
         not_found=true
         for name in "${LIST[@]}"
         do
