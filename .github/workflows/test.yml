@@ -2,32 +2,12 @@ name: test
 
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: 'name'
-        required: true
-
-env:
-  LIST: ('kamillle' 'hoge')
-  T_NAME: ${{ github.event.inputs.name }}
 
 jobs:
   invoke:
     runs-on: ubuntu-latest
     steps:
-    - name: Verify name is allowed
+    - uses: actions/checkout@v2
+    - name: echo last pr number
       run: |
-        LIST=('kamillle' 'hoge')
-        not_found=true
-        for name in "${LIST[@]}"
-        do
-          echo $name
-          if echo $name | grep -qx ${T_NAME} >/dev/null; then
-            not_found=false
-          fi
-        done
-
-        if [ ${not_found} ]; then
-          echo 'name is not allowed'
-          exit 1
-        fi
+        echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
