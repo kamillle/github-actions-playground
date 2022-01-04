@@ -11,4 +11,4 @@ jobs:
     - name: echo last pr number
       run: |
         # echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
-        echo `git log --merges -n 1`
+        echo `git log`
