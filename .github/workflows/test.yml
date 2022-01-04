@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 300
     - name: echo last pr number
       run: |
         echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
