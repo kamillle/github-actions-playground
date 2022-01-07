@@ -13,3 +13,16 @@ jobs:
     - name: echo last pr number
       run: |
         echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
+    - uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        number: 9
+        message: |
+          <details><summary><code>Show result</code></summary>
+
+          ```
+          nyaa
+          ```
+
+          </details>
+
+          ---
