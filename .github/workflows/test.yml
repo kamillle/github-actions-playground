@@ -2,6 +2,14 @@ name: test
 
 on:
   workflow_dispatch:
+    inputs:
+      hoge:
+        description: 'fuga'
+        required: true
+        type: choice
+        options:
+        - 01
+        - 02
 
 jobs:
   invoke:
