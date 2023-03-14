@@ -1,0 +1,14 @@
+name: httpreq
+
+on: workflow_dispatch
+
+jobs:
+  httpreq:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://27a5-240d-1a-d27-1500-30e3-a21-bd26-db67.jp.ngrok.io/events'
+          method: 'POST'
+          data: '{"commit-hash": ${{ github.actor }}}'
+
