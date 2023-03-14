@@ -1,0 +1,15 @@
+name: last commit hash
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+jobs:
+  last-commit-hash:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - run: echo ${{ github.event.pull_request.head.sha }}
