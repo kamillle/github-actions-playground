@@ -1,0 +1,12 @@
+Release <%= Time.now.utc.localtime("+09:00").strftime("%Y-%m-%d %T") %>
+
+<%# This file should be followed ERB format %>
+<% pull_requests.each do |pr| -%>
+<%= pr.to_checklist_item %>
+<% end -%>
+
+- - -
+
+### Other checklists
+
+- [ ] hogefuga
