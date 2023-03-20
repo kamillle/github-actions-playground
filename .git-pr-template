@@ -7,4 +7,4 @@ Release <%= Time.now.strftime("%Y-%m-%d") %>
 
 ### Other checklists
 
-- [ ]
+- [ ] hogefuga
