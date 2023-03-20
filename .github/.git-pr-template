@@ -1,12 +1,22 @@
 Release <%= Time.now.utc.localtime("+09:00").strftime("%Y-%m-%d %T") %>
 
-<%# This file should be followed ERB format %>
+<%# This file should be followed Markdown and ERB format %>
+
+# Rules
+
+- A
+  - A-1
+- B
+
+# List of pull requests
+
 <% pull_requests.each do |pr| -%>
 <%= pr.to_checklist_item %>
 <% end -%>
 
-- - -
+# Other checklists
 
-### Other checklists
+<%# this is a sample comment %>
 
-- [ ] hogefuga
+- [ ] others1
+  - others1-a
