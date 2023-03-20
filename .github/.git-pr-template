@@ -1,4 +1,5 @@
-Release <%= Time.now %>
+<%# This file should be followed ERB format %>
+Release <%= Time.now.utc.localtime("+09:00").strftime("%Y-%m-%d %T") %>
 <% pull_requests.each do |pr| -%>
 <%= pr.to_checklist_item %>
 <% end -%>
