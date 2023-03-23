@@ -15,6 +15,9 @@ jobs:
   invoke:
     runs-on: ubuntu-latest
     steps:
+    - run: |
+        echo ${GITHUB_REF#refs/heads/}
+        echo ${GITHUB_REF}
     - name: Verify name is allowed
       run: |
         LIST=('kamillle' 'hoge')
