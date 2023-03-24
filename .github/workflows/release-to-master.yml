@@ -10,7 +10,8 @@ jobs:
   create-release-pr:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 with:
+    - uses: actions/checkout@v2
+      with:
         fetch-depth: 0
     - uses: ruby/setup-ruby@v1
       with:
