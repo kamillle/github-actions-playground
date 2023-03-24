@@ -1,6 +1,7 @@
 name: Create release pull request
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - release
@@ -16,6 +17,7 @@ jobs:
       with:
         ruby-version: 3.0
     - name: Create a release pull request
+      id: pr
       env:
         GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_PR_RELEASE_BRANCH_PRODUCTION: master
@@ -24,3 +26,7 @@ jobs:
       run: |
         gem install -N git-pr-release
         git-pr-release --no-fetch
+    - name: echo
+      run: |
+        echo ${{steps.pr.outputs.result}}
+
