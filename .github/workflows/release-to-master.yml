@@ -31,11 +31,12 @@ jobs:
         created_at=$(cat result.json | jq .release_pull_request.data.created_at)
         updated_at=$(cat result.json | jq .release_pull_request.data.updated_at)
         pr_url=$(cat result.json | jq .release_pull_request.data.html_url)
+        ${pr_url//\"/}
 
         echo "created_at=$created_at" >> $GITHUB_ENV
         echo "updated_at=$updated_at" >> $GITHUB_ENV
         echo "pr_url=$pr_url" >> $GITHUB_ENV
     - name: Echo
-      if: env.created_at == env.updated_at
-      run:  echo 'hoge'
+      # if: env.created_at == env.updated_at
+      run: echo ${{ env.pr_url }}
 
