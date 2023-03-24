@@ -25,8 +25,14 @@ jobs:
         GIT_PR_RELEASE_TEMPLATE: .github/.git-pr-template
       run: |
         gem install -N git-pr-release
-        git-pr-release --no-fetch
+        git-pr-release --no-fetch --json > result.json
     - name: echo
       run: |
-        echo ${{steps.pr.outputs.result}}
+        created_at=$(cat result.json | jq .release_pull_request.data.created_at)
+        updated_at=$(cat result.json | jq .release_pull_request.data.created_at)
+        pr_url=$(cat result.json | jq .release_pull_request.data.html_url)
+        echo $created_at $updated_at $pr_url
+        if [ $created_at = $updated_at ]; then
+          echo 'hoge'
+        fi
 
