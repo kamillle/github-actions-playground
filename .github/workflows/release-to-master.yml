@@ -26,13 +26,16 @@ jobs:
       run: |
         gem install -N git-pr-release
         git-pr-release --no-fetch --json > result.json
-    - name: echo
+    - name: Set variables
       run: |
         created_at=$(cat result.json | jq .release_pull_request.data.created_at)
         updated_at=$(cat result.json | jq .release_pull_request.data.created_at)
         pr_url=$(cat result.json | jq .release_pull_request.data.html_url)
-        echo $created_at $updated_at $pr_url
-        if [ $created_at = $updated_at ]; then
-          echo 'hoge'
-        fi
+
+        echo "created_at=$created_at" >> $GITHUB_ENV
+        echo "updated_at=$updated_at" >> $GITHUB_ENV
+        echo "pr_url=$created_at" >> $GITHUB_ENV
+    - name: Echo
+      if: env.created_at == env.updated_at
+      run:  echo 'hoge'
 
