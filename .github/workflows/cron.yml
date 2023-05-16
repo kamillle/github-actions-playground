@@ -31,4 +31,4 @@ jobs:
 
       - name: Fetch latest sha by new way
         run: |
-          git merge-base master release
+          git merge-base master origin/release
