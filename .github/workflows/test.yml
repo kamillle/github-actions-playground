@@ -3,34 +3,37 @@ name: test
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'name'
+      hoge:
+        description: 'fuga'
         required: true
-
-env:
-  LIST: ('kamillle' 'hoge')
-  T_NAME: ${{ github.event.inputs.name }}
+        type: choice
+        options:
+        - 01
+        - 02
 
 jobs:
   invoke:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 300
     - run: |
         echo ${GITHUB_REF#refs/heads/}
         echo ${GITHUB_REF}
-    - name: Verify name is allowed
+    - name: echo last pr number
       run: |
-        LIST=('kamillle' 'hoge')
-        not_found=true
-        for name in "${LIST[@]}"
-        do
-          echo $name
-          if echo $name | grep -qx ${T_NAME} >/dev/null; then
-            not_found=false
-          fi
-        done
+        echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
+    - uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        number: 9
+        message: |
+          <details><summary><code>Show result</code></summary>
 
-        if [ ${not_found} ]; then
-          echo 'name is not allowed'
-          exit 1
-        fi
+          ```
+          nyaa
+          ```
+
+          </details>
+
+          ---
