@@ -25,6 +25,7 @@ jobs:
         run: |
           echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
       - run: |
+          git fetch
           git branch -a
           git merge-base origin/master origin/release
       - uses: marocchino/sticky-pull-request-comment@v2
