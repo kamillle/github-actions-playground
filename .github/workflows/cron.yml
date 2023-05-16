@@ -31,6 +31,4 @@ jobs:
           echo $SHA
 
       - name: Fetch latest sha by new way
-        run: |
-          git checkout release
-          git merge-base master release
+        run: git merge-base origin/master origin/release
