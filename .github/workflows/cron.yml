@@ -19,7 +19,7 @@ jobs:
 
       - name: aaa
         run: |
-          if [[ ${{ github.event_name }} = 'schedule' ]]; then
+          if [[ ${{ github.event_name }} = 'workflow_dispatch' ]]; then
             echo "schedule event"
           else
             echo "workflow_dispatch event"
