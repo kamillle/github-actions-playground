@@ -4,36 +4,39 @@ on:
   workflow_dispatch:
     inputs:
       hoge:
-        description: 'fuga'
+        description: "fuga"
         required: true
         type: choice
         options:
-        - 01
-        - 02
+          - 01
+          - 02
 
 jobs:
   invoke:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 300
-    - run: |
-        echo ${GITHUB_REF#refs/heads/}
-        echo ${GITHUB_REF}
-    - name: echo last pr number
-      run: |
-        echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
-    - uses: marocchino/sticky-pull-request-comment@v2
-      with:
-        number: 9
-        message: |
-          <details><summary><code>Show result</code></summary>
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 300
+      - run: |
+          echo ${GITHUB_REF#refs/heads/}
+          echo ${GITHUB_REF}
+      - name: echo last pr number
+        run: |
+          echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
+      - run: |
+          git branch -a
+          git merge-base origin/master origin/release
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: 9
+          message: |
+            <details><summary><code>Show result</code></summary>
 
-          ```
-          nyaa
-          ```
+            ```
+            nyaa
+            ```
 
-          </details>
+            </details>
 
-          ---
+            ---
