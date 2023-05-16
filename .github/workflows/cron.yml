@@ -1,8 +1,7 @@
 name: "Cron"
 on:
-  # schedule:
-  #   - cron: "*/10 * * * *"
-  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
 
 jobs:
   deploy:
@@ -27,7 +26,6 @@ jobs:
 
       - name: get HEAD-1 sha
         run: |
-          SHA=$(echo "$GITHUB_CONTEXT" | jq '.event.commits[].id' | tail -2 | head -1 | sed 's/\"//g')
-          echo "image_tag=$SHA" >> $GITHUB_ENV
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          echo "image_tag=${{ github.sha }}" >> $GITHUB_ENV
+
+      - run: echo ${{ env.image_tag }}
