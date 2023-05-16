@@ -1,0 +1,21 @@
+name: "push"
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  deploy:
+    name: debug
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: get HEAD-1 sha
+        run: |
+          SHA=$(echo "$GITHUB_CONTEXT" | jq '.event.commits[].id' | tail -2 | head -1 | sed 's/\"//g')
+          echo $SHA
+          echo ${{ github.sha }}
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
