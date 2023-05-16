@@ -1,7 +1,7 @@
 name: "Schedule Debug"
 on:
   schedule:
-    - cron: "30 3 * * *"
+    - cron: "24 3 * * *"
   workflow_dispatch:
 
 jobs:
