@@ -15,6 +15,6 @@ jobs:
       - name: get HEAD-1 sha
         run: |
           SHA=$(echo "$GITHUB_CONTEXT" | jq '.event.commits[].id' | tail -2 | head -1 | sed 's/\"//g')
-          echo "image_tag=$SHA" >> $GITHUB_ENV
+          echo $SHA
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
