@@ -1,7 +1,7 @@
-name: "Schedule Debug"
+name: "Cron"
 on:
   schedule:
-    - cron: "24 3 * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,11 +14,11 @@ jobs:
 
       - name: Test
         run: |
-          echo ${{ github.actor }}
           echo ${{ github.event }}
           echo ${{ github.event_name }}
 
-      - run: |
+      - name: aaa
+        run: |
           if [[ ${{ github.event_name }} = 'schedule' ]]; then
             echo "schedule event"
           else
