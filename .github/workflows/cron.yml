@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -32,4 +33,5 @@ jobs:
       - name: Fetch latest sha by new way
         run: |
           git fetch
+          git branch -a
           git merge-base master origin/release
