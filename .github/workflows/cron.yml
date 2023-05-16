@@ -34,4 +34,4 @@ jobs:
         run: |
           git fetch
           git branch -a
-          git merge-base master origin/release
+          git merge-base master remotes/origin/master
