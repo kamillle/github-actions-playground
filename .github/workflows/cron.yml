@@ -17,14 +17,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: master
-
-      - run: echo $GITHUB_CONTEXT
+          fetch-depth: 1
 
       - name: Test
         run: |
           git fetch
           git branch -a
-          git merge-base master origin/release
 
       - name: Fetch latest sha by current way
         run: |
