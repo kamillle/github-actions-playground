@@ -24,6 +24,7 @@ jobs:
         run: |
           git fetch
           git branch -a
+          git merge-base master origin/release
 
       - name: Fetch latest sha by current way
         run: |
