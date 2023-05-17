@@ -17,13 +17,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: master
-
-      - run: echo $GITHUB_CONTEXT
+          fetch-depth: 1
 
       - name: Test
         run: |
-          echo ${{ github.event }}
-          echo ${{ github.event_name }}
+          git fetch
+          git branch -a
 
       - name: Fetch latest sha by current way
         run: |
@@ -32,6 +31,4 @@ jobs:
 
       - name: Fetch latest sha by new way
         run: |
-          git fetch
-          git branch -a
-          git merge-base master remotes/origin/release
+          git merge-base master origin/release

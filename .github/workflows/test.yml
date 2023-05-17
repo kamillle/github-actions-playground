@@ -10,6 +10,9 @@ on:
         options:
           - 01
           - 02
+  push:
+    branches:
+      - master
 
 jobs:
   invoke:
@@ -24,6 +27,10 @@ jobs:
       - name: echo last pr number
         run: |
           echo `git log --merges -n 1 | grep 'Merge pull request #' | awk '{ print $4 }' | sed 's/#//'`
+      - name: current way
+        run: |
+          SHA=$(echo "$GITHUB_CONTEXT" | jq '.event.commits[].id' | tail -2 | head -1 | sed 's/\"//g')
+          echo $SHA
       - run: |
           git fetch
           git branch -a
