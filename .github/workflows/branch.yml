@@ -1,0 +1,13 @@
+name: "Branch"
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: debug
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Test
+        run: echo $(git branch)
