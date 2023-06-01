@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 300
       - run: |
-          echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "branch_name=$(GITHUB_REF#refs/heads/)" >> $GITHUB_ENV
 
           echo ${GITHUB_REF#refs/heads/}
           echo ${GITHUB_REF}
