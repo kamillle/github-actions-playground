@@ -22,6 +22,10 @@ jobs:
         with:
           fetch-depth: 300
       - run: |
+          curl -fsSL https://mackerel.io/file/script/setup-apt-v2.sh | sh
+          sudo apt-get install mkr
+          mkr --version
+      - run: |
           echo "branch_name=$(GITHUB_REF#refs/heads/)" >> $GITHUB_ENV
 
           echo ${GITHUB_REF#refs/heads/}
