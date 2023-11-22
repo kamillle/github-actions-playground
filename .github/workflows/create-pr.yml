@@ -13,7 +13,10 @@ jobs:
         with:
           fetch-depth: 0
       - run: echo $(gh --version)
-      - run: git fetch --all && echo $(git log release..master --pretty=format:"%h" | sed 's/^/- /')
+      - run: |
+          git fetch --all
+          git branch -a
+          echo $(git log release..master --pretty=format:"%h" | sed 's/^/- /')
       - name: Create release PR
         env:
           GH_TOKEN: ${{ github.token }}
