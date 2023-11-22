@@ -13,3 +13,5 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
       - run: echo ${{ github.event.pull_request.head.sha }}
+      - run: echo ${{ github.event.pull_request.base.sha }}
+      - run: echo $GITHUB_SHA
