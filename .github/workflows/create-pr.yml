@@ -31,20 +31,11 @@ jobs:
           gh pr create \
             --base master \
             --head release \
-            --title "Release" \
-            --body "$(cat << EOF
-            Commit list(created_at DESC)
-            $(git log remotes/origin/master..remotes/origin/release --pretty=format:"%h" | sed 's/^/- /')
-            EOF
-            )"
+            --title "Production release $(date +'%Y/%m/%d %H:%M:%S')"
       - name: Update release PR
         if: ${{ steps.get-pr-number.outputs.pr_number != '' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh pr edit ${{ steps.get-pr-number.outputs.pr_number }} \
-            --body "$(cat << EOF
-          Commit list(created_at DESC)
-          $(git log remotes/origin/master..remotes/origin/release --pretty=format:"%h" | sed 's/^/- /')
-          EOF
-          )"
+            --title "Production release $(date +'%Y/%m/%d %H:%M:%S')"
