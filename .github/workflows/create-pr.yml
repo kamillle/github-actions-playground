@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
       - run: echo $(gh --version)
       - run: |
-          git fetch --all
+          # git fetch --all
           git branch -a
           echo $(git log remotes/origin/release..remotes/origin/master --pretty=format:"%h" | sed 's/^/- /')
       - name: Create release PR
