@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: echo $(gh --version)
+      - run: echo $(git log release..master --pretty=format:"%h" | sed 's/^/- /')
       - name: Create release PR
         env:
           GH_TOKEN: ${{ github.token }}
