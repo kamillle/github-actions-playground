@@ -12,9 +12,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: echo $(gh --version)
       - name: Create release PR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr create \
-            --base main \
+            --base master \
             --head release \
             --title "Release" \
-            --body "$(git log develop..main --pretty=format:"%h" | sed 's/^/- /')"
+            --body "$(git log release..master --pretty=format:"%h" | sed 's/^/- /')"
