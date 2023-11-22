@@ -39,4 +39,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh pr edit ${{ steps.get-pr-number.outputs.pr_number }} \
-            --body "Commit list(created_at DESC)\n$(git log remotes/origin/release..remotes/origin/master --pretty=format:"%h" | sed 's/^/- /')"
+            -- body "$(cat << EOF
+          Commit list(created_at DESC)
+          $(git log remotes/origin/release..remotes/origin/master --pretty=format:"%h" | sed 's/^/- /')
+          EOF
+          )"
