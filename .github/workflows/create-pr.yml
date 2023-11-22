@@ -16,7 +16,7 @@ jobs:
       - run: |
           git fetch --all
           git branch -a
-          echo $(git log release..master --pretty=format:"%h" | sed 's/^/- /')
+          echo $(git log remotes/origin/release..remotes/origin/master --pretty=format:"%h" | sed 's/^/- /')
       - name: Create release PR
         env:
           GH_TOKEN: ${{ github.token }}
