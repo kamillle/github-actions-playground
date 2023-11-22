@@ -1,0 +1,21 @@
+name: Create and update release PR
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  create-release-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: master
+          base: release
+          draft: false
+          title: Production release PR
+          body: |
+            $(git log develop..main --pretty=format:"%h" | sed 's/^/- /')
