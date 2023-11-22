@@ -32,7 +32,11 @@ jobs:
             --base master \
             --head release \
             --title "Release" \
-            --body "Commit list(created_at DESC)\n$(git log remotes/origin/release..remotes/origin/master --pretty=format:"%h" | sed 's/^/- /')"
+            --body "$(cat << EOF
+            Commit list(created_at DESC)
+            $(git log remotes/origin/master..remotes/origin/release --pretty=format:"%h" | sed 's/^/- /')
+            EOF
+            )"
       - name: Update release PR
         if: ${{ steps.get-pr-number.outputs.pr_number != '' }}
         env:
@@ -41,6 +45,6 @@ jobs:
           gh pr edit ${{ steps.get-pr-number.outputs.pr_number }} \
             --body "$(cat << EOF
           Commit list(created_at DESC)
-          $(git log remotes/origin/release..remotes/origin/master --pretty=format:"%h" | sed 's/^/- /')
+          $(git log remotes/origin/master..remotes/origin/release --pretty=format:"%h" | sed 's/^/- /')
           EOF
           )"
