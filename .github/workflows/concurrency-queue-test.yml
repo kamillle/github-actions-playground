@@ -1,0 +1,40 @@
+name: Concurrency Queue Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "実行ID（区別用）"
+        required: false
+        default: "1"
+        type: string
+
+concurrency:
+  group: concurrency-test
+  cancel-in-progress: false
+
+jobs:
+  queue-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 実行開始
+        run: |
+          echo "=== 実行 ID: ${{ github.event.inputs.run_id }} ==="
+          echo "開始時刻: $(date)"
+          echo "GitHub Run ID: ${{ github.run_id }}"
+          echo "GitHub Run Number: ${{ github.run_number }}"
+
+      - name: 長時間処理をシミュレート
+        run: |
+          echo "60秒間の処理を開始します..."
+          for i in {1..12}; do
+            echo "処理中... ${i}/12 ($(date))"
+            sleep 5
+          done
+          echo "処理完了"
+
+      - name: 実行完了
+        run: |
+          echo "=== 実行 ID: ${{ github.event.inputs.run_id }} 完了 ==="
+          echo "完了時刻: $(date)"
+          echo "この実行がキューで待機していた場合、他の実行が先に完了しているはずです"
